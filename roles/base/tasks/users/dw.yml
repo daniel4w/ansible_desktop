@@ -1,0 +1,25 @@
+- name: users | dw | create group
+  tags: groups,dw,users
+  group:
+    name: dw
+    state: present
+
+- name: users | dw | create user
+  tags: dw,sudo,users
+  user:
+    name: dw
+    group: dw
+    groups: adm,ansible,{{ sudo_group }}
+    state: present
+    comment: "Daniel Weise"
+    password: "{{ dw_password }}"
+    shell: /bin/bash
+
+- name: users | dw | add sudoers file
+  tags: dw,settings,sudo,system,users
+  copy:
+    src: users/sudoers_dw
+    dest: /etc/sudoers.d/dw
+    owner: root
+    group: root
+    mode: 0440
