@@ -9,10 +9,10 @@
   user:
     name: dw
     group: dw
-    groups: adm,ansible,{{ sudo_group }}
+    groups: adm,{{ sudo_group }}
     state: present
     comment: "Daniel Weise"
-    password: "{{ dw_password }}"
+    password: "{{ dw_password | password_hash('sha512')}}"
     shell: /bin/bash
 
 - name: users | dw | add sudoers file

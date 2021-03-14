@@ -5,4 +5,3 @@
 - block:
   # Make sure users exists on system
   - import_tasks: users/dw.yml
-  - import_tasks: users/root.yml
